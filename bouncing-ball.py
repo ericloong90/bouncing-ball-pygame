@@ -1,7 +1,7 @@
 import sys, pygame
 pygame.init()
 
-size = width, height = 1000, 800
+size = width, height = 500, 400
 x, y = 500, 400
 moveX, moveY = 0, 0
 speed = [moveX, moveY]
@@ -9,12 +9,13 @@ black = 0, 0, 0
 grey = 246, 246, 246
 FullScreen = False
 screen = pygame.display.set_mode(size, 0, 32)
-ball = pygame.image.load('ball.png')
+ball = pygame.transform.scale(pygame.image.load('ball.png'), (70, 70))
 gravityAcceleration = 0.3
 horizontalAcceleration = 0
 verticalSpeed = [0, 0]
 horizontalSpeed = [0, 0]
 ballrect = ball.get_rect()
+clock = pygame.time.Clock()
 
 while True:
     for event in pygame.event.get():
@@ -26,7 +27,7 @@ while True:
             if event.key == pygame.K_f:
                 FullScreen = not FullScreen
                 if FullScreen:
-                    screen = pygame.display.set_mode(size, pygame.FULLSCREEN, 32)
+                    screen = pygame.display.set_mode(size, pygame.HWSURFACE|pygame.FULLSCREEN, 32)
                 else:
                     screen = pygame.display.set_mode(size, 0, 32)
 
@@ -57,20 +58,20 @@ while True:
     if x < 0:
         x = 0
         horizontalSpeed = [-horizontalSpeed[0] * 0.7, -horizontalSpeed[1] * 0.7]
-    if x > (1000 - ballrect.right):
-        x = 1000 - ballrect.right
+    if x > (width- ballrect.right):
+        x = width- ballrect.right
         horizontalSpeed = [-horizontalSpeed[0] * 0.7, -horizontalSpeed[1] * 0.7]
     if y < 0:
         y = 0
         verticalSpeed = [0, 0]
-    if y > (800 - ballrect.bottom):
-        y = 800 - ballrect.bottom
+    if y > (height - ballrect.bottom):
+        y = height - ballrect.bottom
         verticalSpeed = [-verticalSpeed[0] * 0.7, -verticalSpeed[1] * 0.7]
-        if (y == (800 - ballrect.height)):
+        if (y == (height - ballrect.height)):
             horizontalSpeed = [horizontalSpeed[0] * 0.95, horizontalSpeed[1] * 0.95]
 
     
-
+    clock.tick(60)
     screen.fill(grey)
     screen.blit(ball, (x, y))
     pygame.display.update()
