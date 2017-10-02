@@ -6,7 +6,7 @@
             "type": "python",
             "request": "launch",
             "stopOnEntry": false,
-            "pythonPath": "${config.python.pythonPath}",
+            "pythonPath": "/usr/local/bin/python3",
             "program": "${file}",
             "debugOptions": [
                 "WaitOnAbnormalExit",

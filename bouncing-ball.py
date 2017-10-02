@@ -9,6 +9,7 @@ black = 0, 0, 0
 grey = 246, 246, 246
 FullScreen = False
 screen = pygame.display.set_mode(size, 0, 32)
+pygame.display.set_caption('Bouncing ball')
 ball = pygame.transform.scale(pygame.image.load('ball.png'), (70, 70))
 gravityAcceleration = 0.3
 horizontalAcceleration = 0
